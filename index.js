@@ -1,6 +1,6 @@
 // Import stylesheets
 import './style.css';
-
+import liff from '@line/liff';
 // Body element
 const body = document.getElementById('body');
 
