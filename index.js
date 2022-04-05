@@ -36,14 +36,14 @@ async function main() {
       body.style.backgroundColor = '#eeeeee';
       break;
   }
-  async function getUserProfile() {
-    const profile = await liff.getProfile();
-    pictureUrl.src = profile.pictureUrl;
-    userId.innerHTML = '<b>userId:</b> ' + profile.userId;
-    statusMessage.innerHTML = '<b>statusMessage:</b> ' + profile.statusMessage;
-    displayName.innerHTML = '<b>displayName:</b> ' + profile.displayName;
-    email.innerHTML = '<b>email:</b> ' + liff.getDecodedIDToken().email;
-  }
+}
+async function getUserProfile() {
+  const profile = await liff.getProfile();
+  pictureUrl.src = profile.pictureUrl;
+  userId.innerHTML = '<b>userId:</b> ' + profile.userId;
+  statusMessage.innerHTML = '<b>statusMessage:</b> ' + profile.statusMessage;
+  displayName.innerHTML = '<b>displayName:</b> ' + profile.displayName;
+  email.innerHTML = '<b>email:</b> ' + liff.getDecodedIDToken().email;
 }
 async function main() {
   // ...
