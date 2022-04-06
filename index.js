@@ -37,6 +37,25 @@ async function main() {
       break;
   }
   getUserProfile();
+  if (!liff.isInClient()) {
+    if (liff.isLoggedIn()) {
+      btnLogIn.style.display = 'none';
+      btnLogOut.style.display = 'block';
+      btnShare.style.display = 'block';
+      getUserProfile();
+    } else {
+      btnLogIn.style.display = 'block';
+      btnLogOut.style.display = 'none';
+    }
+  } else {
+    getUserProfile();
+    btnSend.style.display = 'block';
+    btnShare.style.display = 'block';
+  }
+  btnOpenWindow.style.display = 'block';
+  if (liff.isInClient() && liff.getOS() === 'android') {
+    btnScanCode.style.display = 'block';
+  }
 }
 main();
 async function getUserProfile() {
@@ -47,3 +66,63 @@ async function getUserProfile() {
   displayName.innerHTML = '<b>displayName:</b> ' + profile.displayName;
   email.innerHTML = '<b>email:</b> ' + liff.getDecodedIDToken().email;
 }
+btnLogIn.onclick = () => {
+  liff.login();
+};
+
+btnLogOut.onclick = () => {
+  liff.logout();
+  window.location.reload();
+};
+async function sendMsg() {
+  if (
+    liff.getContext().type !== 'none' &&
+    liff.getContext().type !== 'external'
+  ) {
+    await liff.sendMessages([
+      {
+        type: 'text',
+        text: 'สวัสดีจ้า',
+      },
+    ]);
+    alert('Message sent');
+  }
+}
+btnSend.onclick = () => {
+  sendMsg();
+};
+async function shareMsg() {
+  await liff.shareTargetPicker([
+    {
+      type: 'image',
+      originalContentUrl: 'https://d.line-scdn.net/stf/line-lp/2016_en_02.jpg',
+      previewImageUrl: 'https://d.line-scdn.net/stf/line-lp/2016_en_02.jpg',
+    },
+    {
+      type: 'text',
+      text: 'ทดลองส่งรูป',
+    },
+  ]);
+  if (result) {
+    alert('Msg was shared!');
+  } else {
+    alert('Msg was cancelled by user');
+  }
+  liff.closeWindow();
+}
+btnShare.onclick = () => {
+  shareMsg();
+};
+async function scanCode() {
+  const result = await liff.scanCode();
+  code.innerHTML = '<b>Code: </b>' + result.value;
+}
+btnScanCode.onclick = () => {
+  scanCode();
+};
+btnOpenWindow.onclick = () => {
+  liff.openWindow({
+    url: window.location.href,
+    external: true,
+  });
+};
