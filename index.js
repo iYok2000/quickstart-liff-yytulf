@@ -95,8 +95,10 @@ async function shareMsg() {
   await liff.shareTargetPicker([
     {
       type: 'image',
-      originalContentUrl: 'https://d.line-scdn.net/stf/line-lp/2016_en_02.jpg',
-      previewImageUrl: 'https://d.line-scdn.net/stf/line-lp/2016_en_02.jpg',
+      originalContentUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9HKfAq91FnrNHVxW1UOlsLxJw3yj6wFu6Zg&usqp=CAU',
+      previewImageUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9HKfAq91FnrNHVxW1UOlsLxJw3yj6wFu6Zg&usqp=CAU',
     },
     {
       type: 'text',
