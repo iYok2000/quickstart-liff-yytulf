@@ -53,6 +53,7 @@ async function main() {
     btnShare.style.display = 'block';
   }
   btnOpenWindow.style.display = 'block';
+  // scanQR code only android
   if (liff.isInClient() && liff.getOS() === 'android') {
     btnScanCode.style.display = 'block';
   }
